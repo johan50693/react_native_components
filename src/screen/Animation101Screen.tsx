@@ -1,10 +1,32 @@
 /* eslint-disable prettier/prettier */
 import React, { useRef } from 'react';
-import {View, Text, StyleSheet, Animated} from 'react-native';
+import {View, StyleSheet, Animated, Button} from 'react-native';
 
 export const Animation101Screen = () => {
 
-  const opacity = useRef( new Animated.Value(0.4)).current;
+  const opacity = useRef( new Animated.Value(0)).current;
+
+  const fadeIn = () => {
+    Animated.timing(
+      opacity,
+      {
+        toValue: 1,
+        duration: 300,
+        useNativeDriver: true,
+      }
+    ).start();
+  };
+
+  const fadeOut = () => {
+    Animated.timing(
+      opacity,
+      {
+        toValue: 0,
+        duration: 300,
+        useNativeDriver: true,
+      }
+    ).start();
+  };
 
   return (
     <View style={styles.container}>
@@ -12,6 +34,15 @@ export const Animation101Screen = () => {
               ...styles.purpleBox,
               opacity,
               }} />
+      <Button
+        title= "FadeIn"
+        onPress={fadeIn}
+      />
+
+      <Button
+        title= "FadeOut"
+        onPress={fadeOut}
+      />
     </View>
   );
 };
