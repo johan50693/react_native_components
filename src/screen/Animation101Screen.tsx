@@ -1,53 +1,11 @@
 /* eslint-disable prettier/prettier */
-import React, { useRef } from 'react';
-import {View, StyleSheet, Animated, Button, Easing} from 'react-native';
+import React from 'react';
+import {View, StyleSheet, Animated, Button} from 'react-native';
+import { useAnimation } from '../hooks/useAnimation';
 
 export const Animation101Screen = () => {
 
-  const opacity = useRef( new Animated.Value(0)).current;
-  const top = useRef( new Animated.Value(-150)).current;
-
-  const fadeIn = () => {
-    Animated.timing(
-      opacity,
-      {
-        toValue: 1,
-        duration: 300,
-        useNativeDriver: true,
-      }
-    ).start();
-
-    Animated.timing(
-      top,
-      {
-        toValue: 0,
-        duration: 800,
-        useNativeDriver: true,
-        easing: Easing.bounce,
-      }
-    ).start();
-  };
-
-  const fadeOut = () => {
-    Animated.timing(
-      opacity,
-      {
-        toValue: 0,
-        duration: 300,
-        useNativeDriver: true,
-      }
-    ).start();
-
-    Animated.timing(
-      top,
-      {
-        toValue: -150,
-        duration: 800,
-        useNativeDriver: true,
-        easing: Easing.bounce,
-      }
-    ).start();
-  };
+  const {opacity,position, fadeIn,fadeOut} = useAnimation();
 
   return (
     <View style={styles.container}>
@@ -55,7 +13,7 @@ export const Animation101Screen = () => {
               ...styles.purpleBox,
               opacity,
               transform: [{
-                  translateY: top,
+                  translateY: position,
                 }],
               }} />
       <Button
