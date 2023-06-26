@@ -5,7 +5,7 @@ import { useAnimation } from '../hooks/useAnimation';
 
 export const Animation101Screen = () => {
 
-  const {opacity,position, fadeIn,fadeOut} = useAnimation();
+  const {opacity,position, fadeIn,fadeOut, startMovingPosition} = useAnimation();
 
   return (
     <View style={styles.container}>
@@ -18,7 +18,10 @@ export const Animation101Screen = () => {
               }} />
       <Button
         title= "FadeIn"
-        onPress={fadeIn}
+        onPress={ () => {
+          fadeIn();
+          startMovingPosition(-200,1000);
+        }}
       />
 
       <Button
