@@ -1,6 +1,6 @@
 /* eslint-disable prettier/prettier */
 import React, { useState } from 'react';
-import {View, Switch, Platform, Text, StyleSheet} from 'react-native';
+import {View, Text, StyleSheet} from 'react-native';
 import { HeaderTitle } from '../components/HeaderTitle';
 import { CustonWitch } from '../components/CustonWitch';
 
