@@ -1,24 +1,21 @@
 /* eslint-disable prettier/prettier */
-import React, { useState } from 'react';
-import { StyleSheet, TextInput, View, KeyboardAvoidingView, Platform, ScrollView, Keyboard, TouchableWithoutFeedback } from 'react-native';
+import React from 'react';
+import { StyleSheet, TextInput, View, KeyboardAvoidingView, Platform, ScrollView, Keyboard, TouchableWithoutFeedback, Text } from 'react-native';
 import { HeaderTitle } from '../components/HeaderTitle';
 import { styles } from '../theme/appTheme';
+import { useForm } from '../hooks/useForm';
+import { CustonWitch } from '../components/CustonWitch';
+
+const initialState = {
+  name: '',
+  email: '',
+  phone: '',
+  isSubscribed: false,
+};
 
 export const TextInputScreen = () => {
 
-  const [form, setForm] = useState({
-    name: '',
-    email: '',
-    phone: '',
-  });
-
-  const onChange = (value: string, field: string) => {
-
-    setForm({
-      ...form,
-      [field]: value,
-    });
-  };
+  const {onChange, form, isSubscribed} = useForm(initialState);
 
   return (
       <KeyboardAvoidingView
@@ -46,6 +43,10 @@ export const TextInputScreen = () => {
                 keyboardType="email-address"
               />
 
+              <View style={stylesScreen.switchRow}>
+                <Text style={stylesScreen.switchText} >Suscribirme</Text>
+                <CustonWitch isOn={isSubscribed} onChange={ (value) => onChange(value,'isSubscribed')} />
+              </View>
               <HeaderTitle title={JSON.stringify(form,null,2)} />
               <HeaderTitle title={JSON.stringify(form,null,2)} />
               <TextInput
@@ -71,5 +72,14 @@ const stylesScreen = StyleSheet.create({
       paddingHorizontal: 10,
       borderRadius: 10,
       marginVertical: 10,
+    },
+    switchRow: {
+      flexDirection: 'row',
+      justifyContent: 'space-between',
+      alignItems: 'center',
+      marginVertical: 10,
+    },
+    switchText: {
+      fontSize: 25,
     },
 });
