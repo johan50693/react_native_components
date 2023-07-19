@@ -1,6 +1,6 @@
 /* eslint-disable prettier/prettier */
 import React, { useState } from 'react';
-import { StyleSheet, TextInput, View } from 'react-native';
+import { StyleSheet, TextInput, View, KeyboardAvoidingView, Platform, ScrollView, Keyboard, TouchableWithoutFeedback } from 'react-native';
 import { HeaderTitle } from '../components/HeaderTitle';
 import { styles } from '../theme/appTheme';
 
@@ -21,35 +21,45 @@ export const TextInputScreen = () => {
   };
 
   return (
-      <View style={styles.globalMargin} >
-        <HeaderTitle title="TextInput" />
+      <KeyboardAvoidingView
+        behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
+      >
+        <ScrollView>
+          <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
+            <View style={styles.globalMargin} >
+              <HeaderTitle title="TextInput" />
 
-        <TextInput
-          style={stylesScreen.inputStyle}
-          placeholder="Ingrese su nombre"
-          autoCorrect={false}
-          autoCapitalize="words"
-          onChangeText={ (value) => onChange(value,'name') }
-        />
+              <TextInput
+                style={stylesScreen.inputStyle}
+                placeholder="Ingrese su nombre"
+                autoCorrect={false}
+                autoCapitalize="words"
+                onChangeText={ (value) => onChange(value,'name') }
+              />
 
-        <TextInput
-          style={stylesScreen.inputStyle}
-          placeholder="Ingrese su email"
-          autoCorrect={false}
-          autoCapitalize="none"
-          onChangeText={ (value) => onChange(value,'email') }
-          keyboardType="email-address"
-        />
+              <TextInput
+                style={stylesScreen.inputStyle}
+                placeholder="Ingrese su email"
+                autoCorrect={false}
+                autoCapitalize="none"
+                onChangeText={ (value) => onChange(value,'email') }
+                keyboardType="email-address"
+              />
 
-        <TextInput
-          style={stylesScreen.inputStyle}
-          placeholder="Ingrese su telefono"
-          onChangeText={ (value) => onChange(value,'phone') }
-          keyboardType="phone-pad"
-        />
+              <HeaderTitle title={JSON.stringify(form,null,2)} />
+              <HeaderTitle title={JSON.stringify(form,null,2)} />
+              <TextInput
+                style={stylesScreen.inputStyle}
+                placeholder="Ingrese su telefono"
+                onChangeText={ (value) => onChange(value,'phone') }
+                keyboardType="phone-pad"
+              />
 
-        <HeaderTitle title={JSON.stringify(form,null,2)} />
-      </View>
+              <View style={{height:100}} />
+            </View>
+          </TouchableWithoutFeedback>
+        </ScrollView>
+      </KeyboardAvoidingView>
   );
 };
 
