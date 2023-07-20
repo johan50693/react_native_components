@@ -7,6 +7,7 @@ import { Animation102Screen } from '../screen/Animation102Screen';
 import { SwitchScreen } from '../screen/SwitchScreen';
 import { AlertScreen } from '../screen/AlertScreen';
 import { TextInputScreen } from '../screen/TextInputScreen';
+import { PulltoRefreshScreen } from '../screen/PulltoRefreshScreen';
 
 const Stack = createStackNavigator();
 
@@ -15,6 +16,9 @@ export const  Navigator = () => {
     <Stack.Navigator
       screenOptions={{
         headerShown: false,
+        cardStyle: {
+          backgroundColor: 'white',
+        },
       }}
     >
       <Stack.Screen name="HomeScreen" component={HomeScreen} />
@@ -23,6 +27,7 @@ export const  Navigator = () => {
       <Stack.Screen name="SwitchScreen" component={SwitchScreen} />
       <Stack.Screen name="AlertScreen" component={AlertScreen} />
       <Stack.Screen name="TextInputScreen" component={TextInputScreen} />
+      <Stack.Screen name="PulltoRefreshScreen" component={PulltoRefreshScreen} />
     </Stack.Navigator>
   );
 };
