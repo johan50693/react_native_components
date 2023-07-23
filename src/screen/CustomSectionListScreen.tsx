@@ -3,7 +3,7 @@ import React from 'react';
 import { SectionList, Text, View } from 'react-native';
 import { HeaderTitle } from '../components/HeaderTitle';
 import { styles } from '../theme/appTheme';
-import { ItemSeparator, itemSeparator } from '../components/ItemSeparator';
+import { ItemSeparator } from '../components/ItemSeparator';
 
 interface Casas {
   casa: string;
