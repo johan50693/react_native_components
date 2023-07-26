@@ -3,6 +3,7 @@ import React, {useState} from 'react';
 import { View, StyleSheet, FlatList, ActivityIndicator } from 'react-native';
 import { HeaderTitle } from '../components/HeaderTitle';
 import { FadeInImage } from '../components/FadeInImage';
+import { styles } from '../theme/appTheme';
 
 export const InfiniteScrollScreen = () => {
 
@@ -23,7 +24,14 @@ export const InfiniteScrollScreen = () => {
 
   const renderItem = ( item:number) => {
     return (
-      <FadeInImage uri={`https://picsum.photos/id/${item}/200/300`} />
+      <FadeInImage
+        uri={`https://picsum.photos/id/${item}/200/300`}
+        style = {{
+          width: '100%',
+          height: 400,
+        }}
+      />
+
       );
     };
     // <Image
@@ -42,7 +50,11 @@ export const InfiniteScrollScreen = () => {
           keyExtractor={(item) =>  item.toString() }
           renderItem={({item}) => renderItem(item) }
 
-          ListHeaderComponent={<HeaderTitle title="Infinite Scroll" />}
+          ListHeaderComponent={ () => (
+            <View style= {styles.globalMargin}>
+              <HeaderTitle title="Infinite Scroll" />
+            </View>
+            )}
           onEndReached={ loadMore}
           onEndReachedThreshold={0.5}
 
@@ -62,9 +74,3 @@ export const InfiniteScrollScreen = () => {
   );
 };
 
-const styles = StyleSheet.create({
-    textitem : {
-      backgroundColor: 'green',
-      height: 150,
-    },
-});
