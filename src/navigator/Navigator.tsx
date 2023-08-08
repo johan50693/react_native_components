@@ -1,7 +1,7 @@
 /* eslint-disable prettier/prettier */
 import { createStackNavigator } from '@react-navigation/stack';
 import { HomeScreen } from '../screen/HomeScreen';
-import React from 'react';
+import React, {useContext} from 'react';
 import { Animation101Screen } from '../screen/Animation101Screen';
 import { Animation102Screen } from '../screen/Animation102Screen';
 import { SwitchScreen } from '../screen/SwitchScreen';
@@ -14,13 +14,17 @@ import { InfiniteScrollScreen } from '../screen/InfiniteScrollScreen';
 import { SlidesScreen } from '../screen/SlidesScreen';
 import { ChangeThemeScreen } from '../screen/ChangeThemeScreen';
 import { NavigationContainer } from '@react-navigation/native';
+import { ThemeContext } from '../context/theme/ThemeContext';
 
 const Stack = createStackNavigator();
 
 export const  Navigator = () => {
+
+  const {theme} = useContext(ThemeContext);
+
   return (
     <NavigationContainer
-      // theme={customTheme}
+      theme={theme}
       >
       <Stack.Navigator
         screenOptions={{
