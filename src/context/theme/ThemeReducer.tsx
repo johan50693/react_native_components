@@ -35,7 +35,7 @@ export const darkTheme: ThemeState = {
     background: 'black',
     card: 'black',
     text: 'white',
-    border: 'black',
+    border: 'white',
     notification: 'teal',
   },
 };

@@ -1,15 +1,16 @@
 /* eslint-disable prettier/prettier */
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import { RefreshControl, ScrollView, View } from 'react-native';
 import { HeaderTitle } from '../components/HeaderTitle';
 import { styles } from '../theme/appTheme';
+import { ThemeContext } from '../context/theme/ThemeContext';
 
 
 export const PulltoRefreshScreen = () => {
 
   const [refreshing, setRefreshing] = useState(false);
   const [data, setData] = useState<string>();
-
+  const {theme: {colors,dark}} = useContext(ThemeContext);
   const onRefresh = () => {
     setRefreshing(true);
     setTimeout(() => {
@@ -27,8 +28,9 @@ export const PulltoRefreshScreen = () => {
           refreshing={refreshing}
           onRefresh={onRefresh}
           progressViewOffset={10}
-          progressBackgroundColor="#5856D6"
-          colors={['white','red','orange']}
+          progressBackgroundColor={colors.text}
+          colors={[colors.background]}
+          tintColor={ dark ? 'white' : 'black'}
         />
       }
     >

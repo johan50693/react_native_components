@@ -1,12 +1,13 @@
 /* eslint-disable prettier/prettier */
-import { useNavigation } from '@react-navigation/native';
-import React, {useState, useRef} from 'react';
+// import { useNavigation } from '@react-navigation/native';
+import React, {useState, useRef, useContext} from 'react';
 import { Dimensions, ImageSourcePropType, SafeAreaView, Image, View, Text, StyleSheet, Animated } from 'react-native';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import Carousel, {Pagination} from 'react-native-snap-carousel';
 import Icon from 'react-native-vector-icons/Ionicons';
 import { useAnimation } from '../hooks/useAnimation';
 import { StackScreenProps } from '@react-navigation/stack';
+import { ThemeContext } from '../context/theme/ThemeContext';
 
 const {width: screenWidth} = Dimensions.get('window');
 
@@ -40,17 +41,18 @@ interface Props extends StackScreenProps<any, any>{}
 export const SlidesScreen = ({navigation}:Props )=> {
 
   const [activeIndex, setActiveIndex] = useState(0);
-  const navigationHook = useNavigation();
+  // const navigationHook = useNavigation();
   const {opacity, fadeIn} = useAnimation();
   // const [isVisible, setIsVisible] = useState(false);
   const isVisible = useRef(false);
+  const {theme:{colors}} = useContext(ThemeContext);
 
   const renderItem = (item : Slide) => {
 
     return (
       <View style={{
         flex:1,
-        backgroundColor: 'white',
+        backgroundColor: colors.background,
         borderRadius: 5,
         padding: 40,
         justifyContent: 'center',
@@ -64,8 +66,18 @@ export const SlidesScreen = ({navigation}:Props )=> {
             resizeMode: 'center',
           }}
         />
-        <Text style={styles.title} >{item.title}</Text>
-        <Text style={styles.subTitle} >{item.desc}</Text>
+        <Text style={{
+          ...styles.title,
+          color: colors.primary,
+          }} >
+            {item.title}
+        </Text>
+        <Text style={{
+          ...styles.subTitle,
+          color: colors.text,
+          }} >
+            {item.desc}
+        </Text>
       </View>
     );
   };
@@ -107,7 +119,7 @@ export const SlidesScreen = ({navigation}:Props )=> {
                 width: 10,
                 height: 10,
                 borderRadius: 10,
-                backgroundColor: '#5856d6',
+                backgroundColor: colors.primary,
               }}
             />
 
@@ -121,7 +133,8 @@ export const SlidesScreen = ({navigation}:Props )=> {
                 <TouchableOpacity
                   style={{
                     flexDirection: 'row',
-                    backgroundColor: '#5856d6',
+                    backgroundColor: colors.primary,
+                    color: colors.text,
                     width: 140,
                     height: 50,
                     borderRadius: 10,
@@ -160,7 +173,6 @@ const styles = StyleSheet.create({
   title: {
     fontSize: 30,
     fontWeight: 'bold',
-    color: '#5856d6',
   },
   subTitle: {
     fontSize: 16,

@@ -41,10 +41,10 @@ export const CustomSectionListScreen = () => {
               <HeaderTitle title={'Total de casas ' + casas.length} />
             </View>
           )}
-          renderItem={({item}) => <Text>{item}</Text>}
+          renderItem={({item}) => <Text style={{color:colors.text}} >{item}</Text>}
           stickySectionHeadersEnabled
           renderSectionHeader={ ({section}) => (
-            <View style={{ backgroundColor: colors.background}}>
+            <View >
               <HeaderTitle title={section.casa} />
             </View>
             )
