@@ -1,6 +1,7 @@
 /* eslint-disable prettier/prettier */
-import { createContext, useReducer } from 'react';
-import { ThemeState, lightTheme, themeReducer } from './ThemeReducer';
+import { createContext, useReducer, useEffect } from 'react';
+import { ThemeState, darkTheme, lightTheme, themeReducer } from './ThemeReducer';
+import { useColorScheme } from 'react-native';
 
 interface ThemeContextProps {
   theme: ThemeState;
@@ -12,7 +13,14 @@ export const ThemeContext = createContext({} as ThemeContextProps );
 
 export const ThemeProvider = ({children}: any) => {
 
-  const [theme, dispatch] = useReducer(themeReducer, lightTheme);
+  const colorScheme = useColorScheme();
+  const [theme, dispatch] = useReducer(themeReducer, (colorScheme === 'dark') ? darkTheme : lightTheme);
+
+  useEffect(() => {
+      (colorScheme === 'light')
+      ? setLightTheme()
+      : setDarkTheme();
+  }, [colorScheme]);
 
   const setDarkTheme = () => {
     dispatch({type: 'set_dark_theme'});
